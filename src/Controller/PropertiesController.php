@@ -3,9 +3,8 @@
 namespace App\Controller;
 
 use App\Dto\PropertiesDto;
-use App\Entity\Properties;
-use App\Interface\PropertiesInterface;
 use App\Service\PropertiesService;
+use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -18,27 +17,42 @@ final class PropertiesController extends AbstractController
     /**
      * @throws ExceptionInterface
      */
-    #[Route('/properties/store', name: 'properties', methods: ['POST'])]
+    #[Route(path: '/properties/store', name: 'properties', methods: ['POST'])]
     public function store(
+        LoggerInterface     $loggerInterface,
         Request             $request,
         SerializerInterface $serializer,
         PropertiesService   $propertiesService
     ): JsonResponse
     {
-        $properties = $serializer->deserialize(
+        $loggerInterface->info(
+            "Get request for store new Property.",
+            json_decode(
+                $request->getContent(),
+                true
+            ),
+        );
+
+        /** @var PropertiesDto $propertiesDto */
+        $propertiesDto = $serializer->deserialize(
             $request->getContent(),
             PropertiesDto::class,
             'json'
         );
 
         $propertiesService->store(
-            $properties
+            $propertiesDto
         );
+
+        /*
+         * TODO If i get false, i just return message.
+         * TODO I need to do it like it was in Laravel
+         * TODO I should get message.
+         * */
 
         return $this->json(
             [
-                'message' => 'Welcome to your new controller!',
-                'path'    => 'src/Controller/PropertiesController.php',
+                'message' => 'Property has been stored successfully!',
             ]
         );
     }
