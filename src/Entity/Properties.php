@@ -23,7 +23,7 @@ class Properties
 
     #[ORM\ManyToOne(inversedBy: 'properties')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?PropertyType $type_id = null;
+    private ?PropertyType $type = null;
 
     /**
      * @var Collection<int, PropertyValue>
@@ -67,12 +67,12 @@ class Properties
 
     public function getTypeId(): ?PropertyType
     {
-        return $this->type_id;
+        return $this->type;
     }
 
-    public function setTypeId(?PropertyType $type_id): static
+    public function setTypeId(?PropertyType $type): static
     {
-        $this->type_id = $type_id;
+        $this->type = $type;
 
         return $this;
     }

@@ -27,15 +27,15 @@ class PropertyValue
     private ?bool $value_boolean = null;
 
     #[ORM\ManyToOne(inversedBy: 'propertyValues')]
-    private ?PropertyList $property_list_id = null;
+    private ?PropertyList $property_list = null;
 
     #[ORM\ManyToOne(inversedBy: 'propertyValues')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Properties $property_id = null;
+    private ?Properties $property = null;
 
     #[ORM\ManyToOne(inversedBy: 'propertyValues')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Inventories $inventory_id = null;
+    private ?Inventories $inventory = null;
 
     public function getId(): ?int
     {
@@ -92,36 +92,36 @@ class PropertyValue
 
     public function getValueListId(): ?PropertyList
     {
-        return $this->property_list_id;
+        return $this->property_list;
     }
 
-    public function setValueListId(?PropertyList $property_list_id): static
+    public function setValueListId(?PropertyList $property_list): static
     {
-        $this->property_list_id = $property_list_id;
+        $this->property_list = $property_list;
 
         return $this;
     }
 
     public function getPropertyId(): ?Properties
     {
-        return $this->property_id;
+        return $this->property;
     }
 
-    public function setPropertyId(?Properties $property_id): static
+    public function setPropertyId(?Properties $property): static
     {
-        $this->property_id = $property_id;
+        $this->property = $property;
 
         return $this;
     }
 
     public function getInventoryId(): ?Inventories
     {
-        return $this->inventory_id;
+        return $this->inventory;
     }
 
-    public function setInventoryId(?Inventories $inventory_id): static
+    public function setInventoryId(?Inventories $inventory): static
     {
-        $this->inventory_id = $inventory_id;
+        $this->inventory = $inventory;
 
         return $this;
     }
