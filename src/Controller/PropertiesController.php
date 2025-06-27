@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Attributes\ValidatePropertiesDto;
 use App\Dto\PropertiesDto;
 use App\Service\PropertiesService;
 use Psr\Log\LoggerInterface;
@@ -18,11 +19,12 @@ final class PropertiesController extends AbstractController
      * @throws ExceptionInterface
      */
     #[Route(path: '/properties/store', name: 'properties', methods: ['POST'])]
+    #[ValidatePropertiesDto]
     public function store(
         LoggerInterface     $loggerInterface,
         Request             $request,
         SerializerInterface $serializer,
-        PropertiesService   $propertiesService
+        PropertiesService   $propertiesService,
     ): JsonResponse
     {
         $loggerInterface->info(
@@ -43,12 +45,6 @@ final class PropertiesController extends AbstractController
         $propertiesService->store(
             $propertiesDto
         );
-
-        /*
-         * TODO If i get false, i just return message.
-         * TODO I need to do it like it was in Laravel
-         * TODO I should get message.
-         * */
 
         return $this->json(
             [

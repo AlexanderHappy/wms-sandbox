@@ -39,23 +39,6 @@ class PropertiesRepository extends ServiceEntityRepository implements Properties
                 ->getRepository(PropertyType::class)
                 ->find($propertiesDto->type);
 
-            if (!$propertyType) {
-                throw new \InvalidArgumentException('PropertyType not found');
-            }
-
-            $property = $this->entityManagerInterface
-                ->getRepository(Properties::class)
-                ->findOneBy(
-                    [
-                        'title' => $propertiesDto->title,
-                        'slug' => $propertiesDto->slug,
-                    ]
-                );
-
-            if ($property instanceof Properties) {
-                throw new \InvalidArgumentException('Property with given data already exists!');
-            }
-
             $properties = new Properties();
             $properties->setTitle($propertiesDto->title);
             $properties->setSlug($propertiesDto->slug);

@@ -24,12 +24,3 @@ services:
 
     App\Interface\PropertiesInterface $propertiesRepository: '@App\Repository\PropertiesRepository'
     App\Interface\PropertiesInterface $propertiesListRepository: '@App\Repository\PropertyListRepository'
-
-    # Configure specific services to use specific implementations
-#    App\Service\PropertiesService:
-#        arguments:
-#            $propertiesService: '@App\Repository\PropertiesRepository'
-#
-#    App\Service\PropertyListService:
-#        arguments:
-#            $propertiesService: '@App\Repository\PropertyListRepository'
