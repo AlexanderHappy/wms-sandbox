@@ -30,11 +30,11 @@ class PropertyValue
     private ?PropertyList $property_list = null;
 
     #[ORM\ManyToOne(inversedBy: 'propertyValues')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(name: 'property_id',nullable: false)]
     private ?Properties $property = null;
 
     #[ORM\ManyToOne(inversedBy: 'propertyValues')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(name: 'inventory_id', nullable: false)]
     private ?Inventories $inventory = null;
 
     public function getId(): ?int

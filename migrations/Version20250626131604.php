@@ -21,7 +21,7 @@ final class Version20250626131604 extends AbstractMigration
     {
         // this up() migration is auto-generated, please modify it to your needs
         $this->addSql(<<<'SQL'
-            CREATE TABLE inventories (id INT AUTO_INCREMENT NOT NULL, title VARCHAR(255) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4
+            CREATE TABLE inventories (id INT AUTO_INCREMENT NOT NULL, title VARCHAR(255) NOT NULL, slug VARCHAR(255), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4
         SQL);
         $this->addSql(<<<'SQL'
             CREATE TABLE properties (id INT AUTO_INCREMENT NOT NULL, title VARCHAR(255) NOT NULL, slug VARCHAR(255) NOT NULL, type_id INT NOT NULL, INDEX IDX_87C331C7C54C8C93 (type_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4

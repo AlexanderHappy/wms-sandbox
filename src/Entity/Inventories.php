@@ -18,10 +18,13 @@ class Inventories
     #[ORM\Column(length: 255)]
     private ?string $title = null;
 
+    #[ORM\Column(length: 255)]
+    private ?string $slug = null;
+
     /**
      * @var Collection<int, PropertyValue>
      */
-    #[ORM\OneToMany(targetEntity: PropertyValue::class, mappedBy: 'inventory_id')]
+    #[ORM\OneToMany(targetEntity: PropertyValue::class, mappedBy: 'inventory')]
     private Collection $propertyValues;
 
     public function __construct()
@@ -44,6 +47,16 @@ class Inventories
         $this->title = $title;
 
         return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(?string $slug): void
+    {
+        $this->slug = $slug;
     }
 
     /**

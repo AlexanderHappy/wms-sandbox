@@ -2,6 +2,7 @@
 
 namespace App\EventListener;
 
+use App\Attributes\ValidateInventoriesDto;
 use App\Attributes\ValidatePropertiesDto;
 use App\Dto\PropertiesDto;
 use App\Exception\PropertiesValidationErrorsException;
@@ -27,7 +28,7 @@ class ControllerListener
      * @throws PropertiesValidationErrorsException
      * @throws \ReflectionException
      */
-//    #[AsEventListener(event: ControllerEvent::class,)]
+    #[AsEventListener(event: ControllerEvent::class,)]
     public function onKernelController(
         ControllerEvent $event,
     ): void
@@ -35,6 +36,10 @@ class ControllerListener
         //TODO Здесь единая точка входа для listener-а контроллеров
         //TODO надо будет полностью его переписывать под паттерн Strategy или Factory.
         $controller = $event->getController();
+
+        if (!is_array($controller)) {
+            return;
+        }
 
         $reflection = new \ReflectionMethod(
             $controller[0],
