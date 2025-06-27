@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Attributes;
+namespace App\Validator\Attributes;
 
 #[\Attribute(\Attribute::TARGET_METHOD | \Attribute::TARGET_CLASS)]
-class ValidatePropertiesDto
+class ValidateInventoriesDto
 {
 }

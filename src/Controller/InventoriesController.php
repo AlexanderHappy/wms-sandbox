@@ -2,8 +2,8 @@
 
 namespace App\Controller;
 
-use App\Attributes\ValidateInventoriesDto;
 use App\Dto\InventoriesDto;
+use App\Validator\Attributes\ValidateInventoriesDto;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;

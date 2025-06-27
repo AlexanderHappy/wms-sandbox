@@ -2,9 +2,9 @@
 
 namespace App\Controller;
 
-use App\Attributes\ValidatePropertiesDto;
 use App\Dto\PropertiesDto;
 use App\Service\PropertiesService;
+use App\Validator\Attributes\ValidatePropertiesDto;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
