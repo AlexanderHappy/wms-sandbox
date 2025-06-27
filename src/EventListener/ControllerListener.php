@@ -2,13 +2,12 @@
 
 namespace App\EventListener;
 
-use App\Attributes\ValidateInventoriesDto;
-use App\Attributes\ValidatePropertiesDto;
 use App\Dto\PropertiesDto;
 use App\Exception\PropertiesValidationErrorsException;
+use App\Validator\ByAttributesValidator;
+use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\EventDispatcher\Attribute\AsEventListener;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Controller\ErrorController;
 use Symfony\Component\HttpKernel\Event\ControllerEvent;
 use Symfony\Component\Serializer\Exception\ExceptionInterface;
 use Symfony\Component\Serializer\SerializerInterface;
@@ -19,6 +18,8 @@ class ControllerListener
     public function __construct(
         protected SerializerInterface $serializer,
         protected ValidatorInterface  $validator,
+        #[Autowire('%kernel.project_dir%')]
+        private readonly string       $projectDir,
     )
     {
     }
@@ -33,8 +34,6 @@ class ControllerListener
         ControllerEvent $event,
     ): void
     {
-        //TODO Здесь единая точка входа для listener-а контроллеров
-        //TODO надо будет полностью его переписывать под паттерн Strategy или Factory.
         $controller = $event->getController();
 
         if (!is_array($controller)) {
@@ -46,11 +45,14 @@ class ControllerListener
             $controller[1]
         );
 
-        $attributes = $reflection->getAttributes(
-            ValidatePropertiesDto::class
+        $attributesValidator = new ByAttributesValidator(
+            $reflection
+        );
+        $attributesValidator->setAttributesOfValidator(
+            $this->projectDir
         );
 
-        if (empty($attributes)) {
+        if (empty($attributesValidator->getAttributesOfValidator())) {
             return;
         }
 
@@ -60,6 +62,7 @@ class ControllerListener
             ->getContent();
 
         $this->checkContentData(
+            $attributesValidator,
             $requestData
         );
     }
@@ -69,13 +72,24 @@ class ControllerListener
      * @throws PropertiesValidationErrorsException
      */
     private function checkContentData(
-        string $requestData
+        ByAttributesValidator $attributesValidator,
+        string                $requestData
     ): void
     {
+        $validateDtoClass = $attributesValidator
+            ->getAttributesOfValidator()
+            ->getName();
+
+        $validateDtoClass = str_replace(
+            'App\\Attributes\\Validate',
+            'App\\Dto\\',
+            $validateDtoClass
+        );
+
         /** @var PropertiesDto $propertiesDto */
         $propertiesDto = $this->serializer->deserialize(
             $requestData,
-            PropertiesDto::class,
+            $validateDtoClass,
             'json'
         );
 

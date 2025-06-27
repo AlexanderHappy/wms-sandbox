@@ -4,8 +4,6 @@ namespace App\Controller;
 
 use App\Attributes\ValidateInventoriesDto;
 use App\Dto\InventoriesDto;
-use App\Factory\PropertiesFactory;
-use App\Factory\PropertyTypeFactory;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -16,7 +14,7 @@ final class InventoriesController extends AbstractController
 {
     #[Route('/inventories/store', name: 'inventories', methods: 'POST')]
     #[ValidateInventoriesDto]
-    public function index(
+    public function store(
         Request             $request,
         SerializerInterface $serializer,
     ): JsonResponse
