@@ -3,7 +3,7 @@
 namespace App\Service;
 
 use App\Dto\PropertiesDto;
-use App\Interface\PropertiesInterface;
+use App\Repository\Interface\PropertiesInterface;
 use Symfony\Component\DependencyInjection\Attribute\Target;
 
 class PropertiesService

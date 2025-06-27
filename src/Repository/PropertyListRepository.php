@@ -4,7 +4,7 @@ namespace App\Repository;
 
 use App\Dto\PropertiesDto;
 use App\Entity\PropertyList;
-use App\Interface\PropertiesInterface;
+use App\Repository\Interface\PropertiesInterface;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 

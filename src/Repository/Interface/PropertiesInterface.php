@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Interface;
+namespace App\Repository\Interface;
 
 use App\Dto\PropertiesDto;
 

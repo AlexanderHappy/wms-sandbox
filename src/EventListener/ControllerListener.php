@@ -35,10 +35,7 @@ class ControllerListener
     ): void
     {
         $controller = $event->getController();
-
-        if (!is_array($controller)) {
-            return;
-        }
+        if (!is_array($controller)) return;
 
         $reflection = new \ReflectionMethod(
             $controller[0],

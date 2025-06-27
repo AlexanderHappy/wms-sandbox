@@ -5,7 +5,7 @@ namespace App\Repository;
 use App\Dto\PropertiesDto;
 use App\Entity\Properties;
 use App\Entity\PropertyType;
-use App\Interface\PropertiesInterface;
+use App\Repository\Interface\PropertiesInterface;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
