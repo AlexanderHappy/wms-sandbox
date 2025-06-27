@@ -24,7 +24,7 @@ class PropertyType
     /**
      * @var Collection<int, Properties>
      */
-    #[ORM\OneToMany(targetEntity: Properties::class, mappedBy: 'type_id')]
+    #[ORM\OneToMany(targetEntity: Properties::class, mappedBy: 'type')]
     private Collection $properties;
 
     public function __construct()
@@ -73,7 +73,7 @@ class PropertyType
     {
         if (!$this->properties->contains($property)) {
             $this->properties->add($property);
-            $property->setTypeId($this);
+            $property->setType($this);
         }
 
         return $this;
@@ -83,8 +83,8 @@ class PropertyType
     {
         if ($this->properties->removeElement($property)) {
             // set the owning side to null (unless already changed)
-            if ($property->getTypeId() === $this) {
-                $property->setTypeId(null);
+            if ($property->getType() === $this) {
+                $property->setType(null);
             }
         }
 

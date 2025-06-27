@@ -42,7 +42,7 @@ class PropertiesRepository extends ServiceEntityRepository implements Properties
             $properties = new Properties();
             $properties->setTitle($propertiesDto->title);
             $properties->setSlug($propertiesDto->slug);
-            $properties->setTypeId($propertyType);
+            $properties->setType($propertyType);
 
             $this->entityManagerInterface->persist($properties);
             $this->entityManagerInterface->flush();

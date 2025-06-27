@@ -22,7 +22,7 @@ class Properties
     private ?string $slug = null;
 
     #[ORM\ManyToOne(inversedBy: 'properties')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(name: 'type_id', nullable: false,)]
     private ?PropertyType $type = null;
 
     /**
@@ -65,12 +65,12 @@ class Properties
         return $this;
     }
 
-    public function getTypeId(): ?PropertyType
+    public function getType(): ?PropertyType
     {
         return $this->type;
     }
 
-    public function setTypeId(?PropertyType $type): static
+    public function setType(?PropertyType $type): static
     {
         $this->type = $type;
 

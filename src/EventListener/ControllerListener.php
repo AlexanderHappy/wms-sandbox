@@ -27,7 +27,7 @@ class ControllerListener
      * @throws PropertiesValidationErrorsException
      * @throws \ReflectionException
      */
-    #[AsEventListener(event: ControllerEvent::class,)]
+//    #[AsEventListener(event: ControllerEvent::class,)]
     public function onKernelController(
         ControllerEvent $event,
     ): void
@@ -40,6 +40,7 @@ class ControllerListener
             $controller[0],
             $controller[1]
         );
+
         $attributes = $reflection->getAttributes(
             ValidatePropertiesDto::class
         );
@@ -64,7 +65,7 @@ class ControllerListener
      */
     private function checkContentData(
         string $requestData
-    )
+    ): void
     {
         /** @var PropertiesDto $propertiesDto */
         $propertiesDto = $this->serializer->deserialize(

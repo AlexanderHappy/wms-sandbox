@@ -49,7 +49,7 @@ final class Version20250626131604 extends AbstractMigration
         SQL);
 
         // Necessary data for property_type table
-        $this->addSql(
+        /*$this->addSql(
             <<<'SQL'
             INSERT INTO property_type (title, slug)
             VALUES
@@ -58,7 +58,7 @@ final class Version20250626131604 extends AbstractMigration
             ('Число с плавающей точкой', 'Decimal'),
             ('Булево', 'Boolean')
         SQL
-        );
+        );*/
     }
 
     public function down(Schema $schema): void
